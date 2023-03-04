@@ -15,7 +15,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
         setContentView(binding.root)
         supportActionBar?.hide()// esconde a barra de navegacao
 
+        handleUserName()
+
         binding.buttonNewPhrase.setOnClickListener(this)
+    }
+
+    private fun handleUserName(){
+        val name = SecurityPreferences(this).getString("USER_NAME")
+        binding.textUserName.text = "Olá, $name!"
     }
 
     override fun onClick(view: View) {
