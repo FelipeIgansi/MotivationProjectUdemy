@@ -6,13 +6,14 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.example.motivation.infra.Constants
 import com.example.motivation.R
+import com.example.motivation.data.Mock
 import com.example.motivation.infra.SecurityPreferences
 import com.example.motivation.databinding.ActivityMainBinding
 
 class  MainActivity : AppCompatActivity(), View.OnClickListener
 {
     private  lateinit var binding : ActivityMainBinding
-    private var categoryId = 1
+    private var categoryId = Constants.FILTER.ALL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,15 +23,16 @@ class  MainActivity : AppCompatActivity(), View.OnClickListener
         supportActionBar?.hide()// esconde a barra de navegacao
 
         handleUserName()
-        handleFilter(R.id.image_infinity)
+        handleFilter(R.id.image_all)
+        handleNextPhrase()
 
         binding.buttonNewPhrase.setOnClickListener(this)
         //Images
         binding.imageHappyFace.setOnClickListener(this)
-        binding.imageInfinity.setOnClickListener(this)
+        binding.imageAll.setOnClickListener(this)
         binding.imageSunny.setOnClickListener(this)
-
     }
+
 
     private fun handleUserName(){
         val name = SecurityPreferences(this).getString(Constants.KEY.USER_NAME)
@@ -39,20 +41,25 @@ class  MainActivity : AppCompatActivity(), View.OnClickListener
 
     override fun onClick(view: View) {
         if (view.id == R.id.button_new_phrase){
-            var s = ""
-        }else if (view.id in listOf(R.id.image_infinity, R.id.image_happy_face, R.id.image_sunny)){
+            handleNextPhrase()
+        }else if (view.id in listOf(R.id.image_all, R.id.image_happy_face, R.id.image_sunny)){
             handleFilter(view.id)
+        }else if (view.id == R.id.text_phrase){
         }
     }
 
+    private fun handleNextPhrase() {
+        binding.textPhrase.text = Mock().getPhrase(categoryId)
+    }
+
     private fun handleFilter(id: Int) {
-        binding.imageInfinity.setColorFilter(ContextCompat.getColor(this, R.color.dark_purple))
+        binding.imageAll.setColorFilter(ContextCompat.getColor(this, R.color.dark_purple))
         binding.imageSunny.setColorFilter(ContextCompat.getColor(this, R.color.dark_purple))
         binding.imageHappyFace.setColorFilter(ContextCompat.getColor(this, R.color.dark_purple))
         when (id) {
-            R.id.image_infinity -> {
-                binding.imageInfinity.setColorFilter(ContextCompat.getColor(this, R.color.white))
-                categoryId = Constants.FILTER.INFINITY
+            R.id.image_all -> {
+                binding.imageAll.setColorFilter(ContextCompat.getColor(this, R.color.white))
+                categoryId = Constants.FILTER.ALL
             }
             R.id.image_happy_face -> {
                 binding.imageHappyFace.setColorFilter(ContextCompat.getColor(this, R.color.white))

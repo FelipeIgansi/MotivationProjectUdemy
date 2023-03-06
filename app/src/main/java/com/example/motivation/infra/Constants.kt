@@ -6,7 +6,7 @@ class Constants private constructor(){
     }
 
     object FILTER{
-        const val INFINITY = 1
+        const val ALL = 1
         const val HAPPY_FACE = 2
         const val SUNNY = 3
     }
