@@ -18,19 +18,21 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/image_infinity"
             android:src="@drawable/ic_infinity"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="40dp"
-            app:tint="@color/white" />
+            android:layout_height="40dp" />
 
         <ImageView
+            android:id="@+id/image_happy_face"
             android:src="@drawable/ic_happy_face"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="40dp"/>
 
         <ImageView
+            android:id="@+id/image_sunny"
             android:src="@drawable/ic_sunny"
             android:layout_width="0dp"
             android:layout_weight="1"
