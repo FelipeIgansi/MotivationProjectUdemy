@@ -10,4 +10,10 @@ class Constants private constructor(){
         const val HAPPY_FACE = 2
         const val SUNNY = 3
     }
+
+    object LANGUAGE{
+        const val PORTUGUESE = "pt"
+        const val FRANCH = "fr"
+        const val ENGLISH = "en"
+    }
 }

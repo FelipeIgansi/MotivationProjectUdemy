@@ -9,6 +9,7 @@ import com.example.motivation.R
 import com.example.motivation.data.Mock
 import com.example.motivation.infra.SecurityPreferences
 import com.example.motivation.databinding.ActivityMainBinding
+import java.util.*
 
 class  MainActivity : AppCompatActivity(), View.OnClickListener
 {
@@ -22,9 +23,9 @@ class  MainActivity : AppCompatActivity(), View.OnClickListener
         setContentView(binding.root)
         supportActionBar?.hide()// esconde a barra de navegacao
 
-        handleUserName()
+        showUserPhrase()
         handleFilter(R.id.image_all)
-        handleNextPhrase()
+        refrashPhrase()
 
         binding.buttonNewPhrase.setOnClickListener(this)
         //Images
@@ -34,22 +35,23 @@ class  MainActivity : AppCompatActivity(), View.OnClickListener
     }
 
 
-    private fun handleUserName(){
+    private fun showUserPhrase(){
         val name = SecurityPreferences(this).getString(Constants.KEY.USER_NAME)
-        binding.textUserName.text = "Olá, $name!"
+        val salutation = getString(R.string.hello)
+        binding.textUserName.text = "$salutation, $name!"
     }
 
     override fun onClick(view: View) {
         if (view.id == R.id.button_new_phrase){
-            handleNextPhrase()
+            refrashPhrase()
         }else if (view.id in listOf(R.id.image_all, R.id.image_happy_face, R.id.image_sunny)){
             handleFilter(view.id)
         }else if (view.id == R.id.text_phrase){
         }
     }
 
-    private fun handleNextPhrase() {
-        binding.textPhrase.text = Mock().getPhrase(categoryId)
+    private fun refrashPhrase() {
+        binding.textPhrase.text = Mock().getPhrase(categoryId, Locale.getDefault().language)
     }
 
     private fun handleFilter(id: Int) {
