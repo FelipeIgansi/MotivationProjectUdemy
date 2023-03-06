@@ -1,11 +1,14 @@
-package com.example.motivation
+package com.example.motivation.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.example.motivation.infra.Constants
+import com.example.motivation.R
+import com.example.motivation.infra.SecurityPreferences
 import com.example.motivation.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), View.OnClickListener
+class  MainActivity : AppCompatActivity(), View.OnClickListener
 {
     private  lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,10 +21,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
         handleUserName()
 
         binding.buttonNewPhrase.setOnClickListener(this)
+
     }
 
     private fun handleUserName(){
-        val name = SecurityPreferences(this).getString("USER_NAME")
+        val name = SecurityPreferences(this).getString(Constants.KEY.USER_NAME)
         binding.textUserName.text = "Olá, $name!"
     }
 
